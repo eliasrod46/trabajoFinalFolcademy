@@ -1,0 +1,23 @@
+{
+  "name": "eliasfolcademy",
+  "version": "1.0.0",
+  "description": "**Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**",
+  "main": "./dist/pow.js",
+  "scripts": {
+    "start": "tsc && node ./dist/suma.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://eliasrod46@bitbucket.org/eliasrod46/eliasfolcademy.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://bitbucket.org/eliasrod46/eliasfolcademy/issues"
+  },
+  "homepage": "https://bitbucket.org/eliasrod46/eliasfolcademy#readme",
+  "dependencies": {
+    "typescript": "^4.7.4"
+  }
+}
