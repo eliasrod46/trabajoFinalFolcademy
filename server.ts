@@ -1,6 +1,6 @@
 //--------------------------------REQUIRES
 import express from 'express'
-import * as productos from './productos'
+import * as productos from './bbdd/productos'
 
 //Instanciamos el server dde express 
 const app = express()
