@@ -21,28 +21,31 @@ app.get('/productos', (req, res)=> {
   res.json({"respuesta" : productos.getStock()}) 
 })
 
+//
 app.post('/productos', (req, res)=> {
   //Agrega un producto
   //guardo lo recibido por body
-  const newProd = req.body
-  let respuesta = productos.addProduct(newProd)
+  const {nombre, precio, stock} = req.body
+  let respuesta = productos.addProduct(nombre, precio, stock)
   res.json({"respuesta" : respuesta}) 
    
 })
 
-app.put('/productos',(req, res)=> {
+app.put('/productos/:id',(req, res)=> {
   //Actualiza un producto
   //edito el producto recibido
-  const newProd = req.body
-  let respuesta = productos.editProduct(newProd)
+  
+  const {nombre, precio, stock} = req.body
+  const {id} = req.params
+  let respuesta = productos.editProduct(Number(id), nombre, precio, stock)
   res.json({"respuesta" : respuesta})  
 })
 
-app.delete('/productos/:name',(req, res)=> {
+app.delete('/productos/:id',(req, res)=> {
   //Elimina un producto
   //guardo lo recibido por params
-  const {name} = req.params
-  let respuesta = productos.delProduct(name)
+  const {id} = req.params
+  let respuesta = productos.delProduct(Number(id))
   res.json({"respuesta" : respuesta}) 
 })
 
