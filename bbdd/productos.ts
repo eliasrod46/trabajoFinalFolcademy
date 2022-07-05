@@ -1,12 +1,15 @@
 // productos.ts
 // Creando una lista de productos
+
+//Definirmos una interface Producto
 interface Producto { 
   id: number
   nombre: string; 
   precio: number;
   stock: number; 
 } 
-//
+
+//Productos de ejemplo
 const Producto1: Producto = { 
   id: 1,
   nombre: "Yogurt", 
@@ -31,6 +34,8 @@ const Producto4: Producto = {
  stock: 12,
  precio: 40
 }
+
+//Array de Productos
 let productos:Array<Producto> = [
  Producto1,
  Producto2,
@@ -40,6 +45,7 @@ let productos:Array<Producto> = [
 
 //Ver todos los productos
 export function getStock() {
+  //Retorno el array de productos entero
   return productos
 }
 
@@ -61,22 +67,24 @@ export function addProduct(nombre:string, precio:number, stock:number) {
     precio: precio,
     stock: stock
    };
-
+  //Pusheo el nuevo objeto en el array y retorno mensaje OK
   productos.push(newProuct)
   return `producto agregado correctamente con id: ${id}`
 }
 
 //Editar un producto
 export function editProduct(id:number, nombre:string, precio:number, stock:number) {
+  // defino variable indexEdit donce voy a guardar el indice el producto a editar(en caso de encontrarlo) 
   let indexEdit:number = -1
 
+  //Busco si existe en el array algun producto con el id recibido por params  
   productos.forEach((producto,index) => {
     if(producto.id === id){
-
       indexEdit = index
     }
   });
 
+  //Verifico si existe, si existe sobreesribo el objeto con los dotos nuevos
   if(indexEdit !== -1){
     productos[indexEdit].nombre = nombre
     productos[indexEdit].precio = precio
@@ -89,6 +97,24 @@ export function editProduct(id:number, nombre:string, precio:number, stock:numbe
 
 }
 
+//Eliminar un producto
 export function delProduct(id:number) {
-  return "producto eliminado"
+  // defino variable indexDel donce voy a guardar el indice el producto a eliminar(en caso de encontrarlo) 
+  let indexDel:number = -1
+
+  //Busco si existe en el array algun producto con el id recibido por params  
+  productos.forEach((producto,index) => {
+    if(producto.id === id){
+      indexDel = index
+    }
+  });
+
+  //Verifico si existe, si existe con splice elimino el objeto del array
+  if(indexDel !== -1){
+    productos.splice(indexDel,1)
+    return `producto con id: ${id} eliminado`
+  }else{
+    return `No existe producto con el id ingresado(${id})`
+  }
+
 }

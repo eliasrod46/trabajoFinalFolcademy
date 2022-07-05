@@ -1,3 +1,4 @@
+// server.ts
 //--------------------------------REQUIRES
 import express from 'express'
 import * as productos from './bbdd/productos'
