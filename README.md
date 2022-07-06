@@ -4,8 +4,9 @@
 
 ### Iniciar el servidor
 Para iniciar el server y probar la api seguimos los siguientes pasos en la terminal
-1. npm i
-1. npm run start
+
+* npm i
+* npm run start
 
 El puerto por defecto es 3000 
 
