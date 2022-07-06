@@ -1,7 +1,8 @@
 // productos.ts
 // Creando una lista de productos
 
-//Definirmos una interface Producto
+//-----------------------------------------------BBDD
+//----------Definirmos una interface Producto
 interface Producto { 
   id: number
   nombre: string; 
@@ -9,7 +10,7 @@ interface Producto {
   stock: number; 
 } 
 
-//Productos de ejemplo
+//----------Productos de ejemplo
 const Producto1: Producto = { 
   id: 1,
   nombre: "Yogurt", 
@@ -35,7 +36,7 @@ const Producto4: Producto = {
  precio: 40
 }
 
-//Array de Productos
+//----------Array de Productos
 let productos:Array<Producto> = [
  Producto1,
  Producto2,
@@ -43,38 +44,60 @@ let productos:Array<Producto> = [
  Producto4
 ]
 
-//Ver todos los productos
+//-----------------------------------------------Funciones
+//----------Ver todos los productos
 export function getStock() {
   //Retorno el array de productos entero
   return productos
 }
 
-//Agregar un producto
+//----------Agregar un producto
 export function addProduct(nombre:string, precio:number, stock:number) {
 
   // defino variable id 
   let id:number
-  // si el arrray esta vacio se va a asignar a id el valor 1
+  // si el array esta vacio se va a asignar a id el valor 1
   // si no, vamos al ultimo elemento del array y al id del ultimo elemento le sumo 1 y lo guardo en id
   productos.length === 0
   ? id = 1
   : id = productos[productos.length-1].id+1
 
-  //Armo el objeto producto
-  const newProuct: Producto = { 
-    id: id,
-    nombre: nombre, 
-    precio: precio,
-    stock: stock
-   };
-  //Pusheo el nuevo objeto en el array y retorno mensaje OK
-  productos.push(newProuct)
-  return `producto agregado correctamente con id: ${id}`
+  // Validacion(verifico si los datos recibidos vienen con info)
+  // (en el body no hace falta poner los tres datos, solo el nombre es obligatorio)
+  if(nombre === undefined){
+    nombre = 'Sin Dato'
+  }
+
+  if(precio === undefined){
+    precio = 0
+  }
+
+  if(stock === undefined){
+    stock = 0
+  }
+
+  // Verifico si el campo nombre viene con info 
+  if (nombre !== 'Sin Dato') {
+    //Armo el objeto producto
+    const newProuct: Producto = { 
+      id: id,
+      nombre: nombre, 
+      precio: precio,
+      stock: stock
+    };
+    //Pusheo el nuevo objeto en el array y retorno mensaje OK
+    productos.push(newProuct)
+    return `producto agregado correctamente con id: ${id}`
+  } else {
+    throw new Error("Faltan datos para cargar el producto(nombre)");
+    
+  }
+  
 }
 
-//Editar un producto
+//----------Editar un producto
 export function editProduct(id:number, nombre:string, precio:number, stock:number) {
-  // defino variable indexEdit donce voy a guardar el indice el producto a editar(en caso de encontrarlo) 
+  // defino variable indexEdit donde voy a guardar el indice el producto a editar(en caso de encontrarlo) 
   let indexEdit:number = -1
 
   //Busco si existe en el array algun producto con el id recibido por params  
@@ -84,22 +107,34 @@ export function editProduct(id:number, nombre:string, precio:number, stock:numbe
     }
   });
 
-  //Verifico si existe, si existe sobreesribo el objeto con los dotos nuevos
+  //Verifico si existe el producto, si existe sobreesribo el objeto con los datos nuevos
   if(indexEdit !== -1){
-    productos[indexEdit].nombre = nombre
-    productos[indexEdit].precio = precio
-    productos[indexEdit].stock = stock
+
+    // Verifico que datos ingreso el usuario ya que puede modificar 1,2 o los 3 atributos
+    // y luego actualizo la info
+    nombre === undefined
+    ? productos[indexEdit].nombre = productos[indexEdit].nombre
+    : productos[indexEdit].nombre = nombre
+
+    precio === undefined
+    ? productos[indexEdit].precio = productos[indexEdit].precio
+    : productos[indexEdit].precio = precio
+
+    stock === undefined
+    ? productos[indexEdit].stock = productos[indexEdit].stock
+    : productos[indexEdit].stock = stock
+
     return `producto con id: ${id} editado`
 
   }else{
-    return `No existe producto con el id ingresado(${id})`
+    throw new Error(`No existe producto con el id ingresado(${id})`);
   }
 
 }
 
-//Eliminar un producto
+//----------Eliminar un producto
 export function delProduct(id:number) {
-  // defino variable indexDel donce voy a guardar el indice el producto a eliminar(en caso de encontrarlo) 
+  // defino variable indexDel donde voy a guardar el indice el producto a eliminar(en caso de encontrarlo) 
   let indexDel:number = -1
 
   //Busco si existe en el array algun producto con el id recibido por params  
@@ -109,12 +144,12 @@ export function delProduct(id:number) {
     }
   });
 
-  //Verifico si existe, si existe con splice elimino el objeto del array
+  //Verifico si existe el producto con el id, si existe con splice elimino el objeto del array
   if(indexDel !== -1){
     productos.splice(indexDel,1)
     return `producto con id: ${id} eliminado`
   }else{
-    return `No existe producto con el id ingresado(${id})`
+    throw new Error(`No existe producto con el id ingresado(${id})`);
   }
 
 }
