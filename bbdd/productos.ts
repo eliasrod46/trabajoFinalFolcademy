@@ -100,6 +100,11 @@ export function editProduct(id:number, nombre:string, precio:number, stock:numbe
   // defino variable indexEdit donde voy a guardar el indice el producto a editar(en caso de encontrarlo) 
   let indexEdit:number = -1
 
+  //Verifico que lo recibido por parametros sea un numero
+  if(isNaN(id)){
+    throw new Error("El parametro ingresado no es un numero");
+  }
+
   //Busco si existe en el array algun producto con el id recibido por params  
   productos.forEach((producto,index) => {
     if(producto.id === id){
@@ -136,6 +141,11 @@ export function editProduct(id:number, nombre:string, precio:number, stock:numbe
 export function delProduct(id:number) {
   // defino variable indexDel donde voy a guardar el indice el producto a eliminar(en caso de encontrarlo) 
   let indexDel:number = -1
+
+  //Verifico que lo recibido por parametros sea un numero
+  if(isNaN(id)){
+    throw new Error("El parametro ingresado no es un numero");
+  }
 
   //Busco si existe en el array algun producto con el id recibido por params  
   productos.forEach((producto,index) => {

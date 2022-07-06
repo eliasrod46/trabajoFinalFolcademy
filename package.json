@@ -4,7 +4,8 @@
   "description": "**Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**",
   "main": "./dist/server.js",
   "scripts": {
-    "start": "tsc && node ./dist/server.js"
+    "start": "tsc && node ./dist/server.js",
+    "math": "tsc && node ./dist/desafio1/math.js"
   },
   "repository": {
     "type": "git",
