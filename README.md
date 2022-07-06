@@ -1,16 +1,27 @@
+
 # Desafio 2 - api-productos
 ## Elias Rodriguez
 
+### Iniciar el servidor
+Para iniciar el server y probar la api seguimos los siguientes pasos en la terminal
+1. npm i
+1. npm run start
+
+El puerto por defecto es 3000 
+
 ### Descripcion de la api
 ###### La api cuenta con con 4 endpints, get, post, put, detele
-###### get(obtener todos los productos), post(agregar un producto), put(editar un producto), deletet(eliminar un producto)
+* get -> obtener todos los productos
+* post -> agregar un producto(datos por body)
+* put -> editar un producto(indicando id por URL)(datos por body)
+* deletet -> eliminar un producto(indicando id por URL)
 
 ### URL
 
-###### get url:port/porductos ej. localhost:3000/porductos
-###### post url:port/porductos ej. localhost:3000/porductos (formato del body acontinuacion)
-###### put url:port/porductos/:id ej. localhost:3000/porductos/:id (ponemos el id del producto a editar)(formato del body acontinuacion)
-###### delete url:port/porductos/:id ej. localhost:3000/porductos/:id (ponemos el id del producto a eliminar)
+* get -> url:port/productos -> ej. localhost:3000/productos
+* post -> url:port/productos  -> ej. localhost:3000/productos (formato del body acontinuacion)
+* put -> url:port/productos/:id  -> ej. localhost:3000/productos/:id (ponemos el id del producto a editar)(formato del body acontinuacion)
+* delete -> url:port/productos/:id  -> ej. localhost:3000/productos/:id (ponemos el id del producto a eliminar)
 
 
 ### Formato body
