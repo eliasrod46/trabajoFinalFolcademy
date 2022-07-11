@@ -18,7 +18,7 @@ app.use('/productos', rutasProductos)
 
 //----------Ruta raiz
 app.get('/', (req, res) => {
-    res.send('Hola Mundo!')
+    res.send('Hola sera que anda?!')
 })
 
 

@@ -46,13 +46,13 @@ let productos:Array<Producto> = [
 
 //-----------------------------------------------Funciones
 //----------Ver todos los productos
-export function getStock() {
+export function getStock():Array<Producto> {
   //Retorno el array de productos entero
   return productos
 }
 
 //----------Agregar un producto
-export function addProduct(nombre:string, precio:number, stock:number) {
+export function addProduct(nombre:string, precio:number, stock:number):String {
 
   // defino variable id 
   let id:number
@@ -96,7 +96,7 @@ export function addProduct(nombre:string, precio:number, stock:number) {
 }
 
 //----------Editar un producto
-export function editProduct(id:number, nombre:string, precio:number, stock:number) {
+export function editProduct(id:number, nombre:string, precio:number, stock:number):String {
   // defino variable indexEdit donde voy a guardar el indice el producto a editar(en caso de encontrarlo) 
   let indexEdit:number = -1
 
@@ -138,7 +138,7 @@ export function editProduct(id:number, nombre:string, precio:number, stock:numbe
 }
 
 //----------Eliminar un producto
-export function delProduct(id:number) {
+export function delProduct(id:number):String {
   // defino variable indexDel donde voy a guardar el indice el producto a eliminar(en caso de encontrarlo) 
   let indexDel:number = -1
 
@@ -148,11 +148,7 @@ export function delProduct(id:number) {
   }
 
   //Busco si existe en el array algun producto con el id recibido por params  
-  productos.forEach((producto,index) => {
-    if(producto.id === id){
-      indexDel = index
-    }
-  });
+  indexDel= productos.findIndex((producto)=> producto.id == id)
 
   //Verifico si existe el producto con el id, si existe con splice elimino el objeto del array
   if(indexDel !== -1){
