@@ -106,11 +106,8 @@ export function editProduct(id:number, nombre:string, precio:number, stock:numbe
   }
 
   //Busco si existe en el array algun producto con el id recibido por params  
-  productos.forEach((producto,index) => {
-    if(producto.id === id){
-      indexEdit = index
-    }
-  });
+  indexEdit= productos.findIndex((producto)=> producto.id == id)
+
 
   //Verifico si existe el producto, si existe sobreesribo el objeto con los datos nuevos
   if(indexEdit !== -1){
