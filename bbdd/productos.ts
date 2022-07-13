@@ -54,13 +54,21 @@ export function getStock():Array<Producto> {
 //----------Agregar un producto
 export function addProduct(nombre:string, precio:number, stock:number):String {
 
+  //----------------------(Correccion del Fernando Emtnor)----------------------
   // defino variable id 
-  let id:number
   // si el array esta vacio se va a asignar a id el valor 1
   // si no, vamos al ultimo elemento del array y al id del ultimo elemento le sumo 1 y lo guardo en id
-  productos.length === 0
-  ? id = 1
-  : id = productos[productos.length-1].id+1
+  let id:number = !productos.length ? 1 : productos[productos.length-1].id+1
+  
+  // Asi lo hice yo
+  // let id:number = -1
+  
+  // productos.length == 0
+  // ? 1 
+  // : productos[productos.length-1].id+1
+
+  
+  
 
   // Validacion(verifico si los datos recibidos vienen con info)
   // (en el body no hace falta poner los tres datos, solo el nombre es obligatorio)
