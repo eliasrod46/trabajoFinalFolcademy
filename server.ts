@@ -1,30 +1,28 @@
 // server.ts
-//----------------------------------------------------------Imports
+//---------------------------------/---------------------------------Imports
 import express from 'express'
-import rutasProductos from './rutas/productosRutas'
+import userRoutes from './rutas/userRoutes'
+require ('./mongoConn')
 
-//Instanciamos el server dde express 
+//---------------------------------Instanciamos el server de express 
 const app = express()
 
-
-//middlewears
+//---------------------------------/---------------------------------middlewears
 app.use(express.json());
 
 
-//----------------------------------------------------------Rutas
+//---------------------------------/---------------------------------Rutas
+//---------------------------------use rutas
+app.use('/api/usuarios', userRoutes)
 
-//----------rutas
-app.use('/productos', rutasProductos)
-
-//----------Ruta raiz
+//---------------------------------Ruta raiz
 app.get('/', (req, res) => {
-    res.send('Hola sera que anda?!')
+    res.send('Hola Mundo!')
 })
 
 
-//----------------------------------------------------------Levanto el Server
-
-const port = 3000
+//-----------------------------------------------------------Levanto el Server
+const port = 3001
 app.listen(port, () => {
   console.log(`Servidor escuchando en http://localhost:${port}`)
 })

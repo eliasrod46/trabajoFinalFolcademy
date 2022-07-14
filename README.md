@@ -1,5 +1,5 @@
 
-# Desafio 2 - api-productos
+# Desafio 3 - api-productos - conectado a mongoDb con Mongoose
 ## Elias Rodriguez
 
 ### Iniciar el servidor
@@ -8,7 +8,7 @@ Para iniciar el server y probar la api seguimos los siguientes pasos en la termi
 * npm i
 * npm run dev-server
 
-El puerto por defecto es 3000 
+El puerto por defecto es 3001
 
 ### Descripcion de la api
 ###### La api cuenta con con 4 endpints, get, post, put, detele
