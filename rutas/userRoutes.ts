@@ -39,14 +39,14 @@ router.post('/', async(req, res)=> {
 router.put('/:id',async(req, res)=> {
   //Actualiza un usuario
   //guardo el id recibido por params y la info recibida por body
-  const {nombre, precio, descripcion} = req.body
+  const {username, email, password} = req.body
   const {id} = req.params
 
   //Actualizo el usuario con el id recibido
   await UserModel.update({_id:id},{
-    name: nombre,
-    price: precio,
-    description: descripcion
+    username: username,
+    email: email,
+    password: password
 
   });
   res.json({"mensaje":`Producto con id: ${id} Modificado con exito `})
