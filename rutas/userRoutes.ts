@@ -1,67 +1,125 @@
 // userRoutes.ts
 //---------------------------------/---------------------------------Imports
 import {Router} from 'express'
-import UserModel from '../models/userModel'
-
+import * as Usuario from '../controllers/userController'
 //---------------------------------/---------------------------------instancio router
 const router = Router();
 
 
 //---------------------------------/---------------------------------Rutas
 
-//---------------------------------Ruta get
+//---------------------------------/---------------------------------Rutas get
+// Todos los usuarios
 router.get('/', async(req, res)=> {
   //Lista todos los usuarios
-  const respuesta = await UserModel.find();
+  const respuesta = await Usuario.getAllUsers();
   res.json({respuesta})
 
 })
+// get Usuario por id
+router.get('/id/:id', async(req, res)=> {
+  //Trae el us con id indicado en params
+  
+  //guardo el id recibido por params
+  const {id} = req.params
+  const respuesta = await Usuario.getUserById(id);
+  res.json({respuesta})
+})
+// get Usuario por username
+router.get('/username/:username', async(req, res)=> {
+  //Trae el us con id indicado en params
+  
+  //guardo el username recibido por params
+  const {username} = req.params
+  const respuesta = await Usuario.getUserByUsername(username);
+  res.json({respuesta})
+})
+// get Usuario por mail
+router.get('/email/:email', async(req, res)=> {
+  //Trae el us con id indicado en params
+  
+  //guardo el email recibido por params
+  const {email} = req.params
+  const respuesta = await Usuario.getUserByEmail(email);
+  res.json({respuesta})
+})
 
-//---------------------------------Ruta post
+//---------------------------------/---------------------------------Ruta post
 router.post('/', async(req, res)=> {
   //Agrega un usuario
   //guardo la info recibida por body
   const {username, email, password} = req.body
 
-  //instancio un modelo UserModel con los datos recibidos
-  const newUser = new UserModel({
-    username: username,
-    email: email,
-    password: password
-  })
-
-  //guardo en BBDD
-  const userSaved = await newUser.save()
+  //guardo en BBDD()
+  const userSaved = await Usuario.addUser(username, email, password)
   res.json({"mensaje":`Producto Agregado con exito con id: ${userSaved._id}`})
 })
 
-//---------------------------------Ruta put
-router.put('/:id',async(req, res)=> {
-  //Actualiza un usuario
+//---------------------------------/---------------------------------Rutas put
+// edit Usuario por id
+router.put('/id/:id',async(req, res)=> {
+  //Actualiza un usuario por id
   //guardo el id recibido por params y la info recibida por body
   const {username, email, password} = req.body
   const {id} = req.params
 
-  //Actualizo el usuario con el id recibido
-  await UserModel.update({_id:id},{
-    username: username,
-    email: email,
-    password: password
+  const respuesta = await Usuario.editUserById(id, username, email, password)
 
-  });
-  res.json({"mensaje":`Producto con id: ${id} Modificado con exito `})
+
+  res.json({"mensaje":`${respuesta}`})
+})
+// edit Usuario por username
+router.put('/username/:usNameToEdit',async(req, res)=> {
+  //Actualiza un usuario por username
+  //guardo el usname recibido por params y la info recibida por body
+  const {username, email, password} = req.body
+  const {usNameToEdit} = req.params
+
+  const respuesta = await Usuario.editUserByUsername(usNameToEdit, username, email, password)
+  res.json({"mensaje":`${respuesta}`})
+
+})
+// edit Usuario por email
+router.put('/email/:emailToEdit',async(req, res)=> {
+  //Actualiza un usuario por username
+  //guardo el usname recibido por params y la info recibida por body
+  const {username, email, password} = req.body
+  const {emailToEdit} = req.params
+
+  const respuesta = await Usuario.editUserByEmail(emailToEdit, username, email, password)
+  res.json({"mensaje":`${respuesta}`})
 })
 
-//---------------------------------Ruta delete
-router.delete('/:id',async(req, res)=> {
+//---------------------------------/---------------------------------Rutas delete
+// delete Usuario por id
+router.delete('/id/:id',async(req, res)=> {
   //Elimina un usuario
-
   //guardo el id recibido por params
   const {id} = req.params
 
   //Elimino el usuario con el id recibido
-  await UserModel.deleteOne({_id:id})
-  res.json({"mensaje":`Producto con id: ${id} Eliminado con exito `})
+  const respuesta = await Usuario.delUserById(id)
+  res.json({"mensaje":`${respuesta}`})
+})
+// delete Usuario por username
+router.delete('/username/:usernameToDel',async(req, res)=> {
+  //Elimina un usuario
+  //guardo el id recibido por params
+  const usernameToDel:string = req.params.usernameToDel
+
+  //Elimino el usuario con el id recibido
+  const respuesta:string = await Usuario.delUserByUsername(usernameToDel)
+  res.json({"mensaje":`${respuesta}`})
+})
+// delete Usuario por email
+router.delete('/email/:emailToDel',async(req, res)=> {
+  //Elimina un usuario
+  //guardo el id recibido por params
+  const emailToDel:string = req.params.emailToDel
+
+  //Elimino el usuario con el id recibido
+  const respuesta:string = await Usuario.delUserByEmail(emailToDel)
+  res.json({"mensaje":`${respuesta}`})
 })
 
 export default router;
