@@ -2,7 +2,7 @@
 
 ## Elias Rodriguez
 
-#### En este desafio implementamos una conexion a mongoDB con mongoose y establecimos dos endpoints get(trate todos los usuarios), post(agrega un usaurio) y delete(elimina un usuario indicando su username)
+#### En este desafio implementamos una conexion a mongoDB con mongoose y establecimos tres endpoints get(trate todos los usuarios), post(agrega un usaurio) y delete(elimina un usuario indicando su username)
 
 ### Iniciar el servidor
 
