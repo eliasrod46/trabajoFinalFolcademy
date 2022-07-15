@@ -1,40 +1,42 @@
+# Desafio 3 - api-productos(get - post - delete) - conectado a mongoDb con Mongoose
 
-# Desafio 3 - api-productos - conectado a mongoDb con Mongoose
 ## Elias Rodriguez
 
+#### En este desafio implementamos una conexion a mongoDB con mongoose y establecimos dos endpoints get(trate todos los usuarios), post(agrega un usaurio) y delete(elimina un usuario indicando su username)
+
 ### Iniciar el servidor
+
 Para iniciar el server y probar la api seguimos los siguientes pasos en la terminal
 
-* npm i
-* npm run dev-server
+- npm i
+- npm run dev-server
 
-El puerto por defecto es 3001
+El puerto por defecto es 3000
 
 ### Descripcion de la api
-###### La api cuenta con con 4 endpints, get, post, put, detele
-* get -> obtener todos los productos
-* post -> agregar un producto(datos por body)
-* put -> editar un producto(indicando id por URL)(datos por body)
-* deletet -> eliminar un producto(indicando id por URL)
+
+###### La api cuenta con con 3 endpoints, get, post y delete
+
+- get -> obtener todos los usuarios
+- post -> agregar un usuario(datos por body)
+- delete -> eliminar usuario por username(datos por params)
 
 ### URL
 
-* get -> url:port/productos -> ej. localhost:3000/productos
-* post -> url:port/productos  -> ej. localhost:3000/productos (formato del body acontinuacion)
-* put -> url:port/productos/:id  -> ej. localhost:3000/productos/:id (ponemos el id del producto a editar)(formato del body acontinuacion)
-* delete -> url:port/productos/:id  -> ej. localhost:3000/productos/:id (ponemos el id del producto a eliminar)
-
+- get -> url:port/usuarios -> ej. localhost:3000/usuarios
+- post -> url:port/usuarios -> ej. localhost:3000/usuarios (formato del body acontinuacion)
+- delete -> url:port/usuarios -> ej. localhost:3000/usuarios/:username (username va en la url como parametro)
 
 ### Formato body
-###### El body tiene 3 atributos(nombre, precio, stock)
-###### Para agregar un producto(post) el parametro nombre es oblicatorio
-###### Para editar, en la url debe indicar el id del producto, y en el body solo el atributo a modificar
 
+###### El body tiene 3 atributos(nombre, precio, stock)
+
+###### Para agregar un producto(post) todos los parametros son oblicatorios
 
 ```
-{ 
- nombre: "", 
- precio: 0,
- stock: 0
+{
+ username: "",
+ email: "",
+ password: ""
 }
 ```
