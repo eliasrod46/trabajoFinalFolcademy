@@ -8,7 +8,19 @@ import UserModel from "../models/userModel";
 export const getAllUsers = async (req: any, res: any) => {
   //metodo find() sin filtro trae todos los doc de la coleccion
   try {
-    res.json({ Respuesta: await UserModel.find() });
+    let order = "ASC";
+    let atributo = "id";
+    if (req.query.order) {
+      order = req.query.order;
+    }
+    if (req.query.atributo) {
+      atributo = req.query.atributo;
+    }
+    res.json({
+      Respuesta: await UserModel.find({}, "username email").sort({
+        atributo: order,
+      }),
+    });
   } catch (error) {
     console.log(`Error al traer todos los usuarios: ${error}`);
   }
@@ -19,7 +31,9 @@ export const getUserById = async (req: any, res: any) => {
   //metodo find() con filtro trae el us con el id indicado de la coleccion
   try {
     const { dato } = req.params;
-    res.json({ Respuesta: await UserModel.find({ _id: dato }) });
+    res.json({
+      Respuesta: await UserModel.find({ _id: dato }, "username email"),
+    });
   } catch (error) {
     console.log(`Error al traer el usuario por id : ${error}`);
   }
@@ -30,7 +44,9 @@ export const getUserByUsername = async (req: any, res: any) => {
   //metodo find() con filtro trae el us con el username indicado de la coleccion
   try {
     const { dato } = req.params;
-    res.json({ Respuesta: await UserModel.find({ username: dato }) });
+    res.json({
+      Respuesta: await UserModel.find({ username: dato }, "username email"),
+    });
   } catch (error) {
     console.log(`Error al traer el usuario por username : ${error}`);
   }
@@ -41,7 +57,9 @@ export const getUserByEmail = async (req: any, res: any) => {
   //metodo find() con filtro trae el us con el email indicado de la coleccion
   try {
     const { dato } = req.params;
-    res.json({ Respuesta: await UserModel.find({ email: dato }) });
+    res.json({
+      Respuesta: await UserModel.find({ email: dato }, "username email"),
+    });
   } catch (error) {
     console.log(`Error al traer el usuario por email : ${error}`);
   }

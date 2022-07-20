@@ -140,3 +140,21 @@ export const ValidationUsername = [
   check("dato").isString().withMessage("El username debe ser tipo string"),
   validateFields,
 ];
+
+//validation queries
+
+export const ValidationQuery = [
+  //delete username
+  check("order")
+    .isString()
+    .withMessage("El username debe ser tipo string")
+    .isIn(["ASC", "DESC"])
+    .withMessage("El order debe ser 'ASC' o 'DESC'"),
+
+  check("atributo")
+    .isString()
+    .withMessage("El username debe ser tipo string")
+    .isIn(["username", "email"])
+    .withMessage("El order debe ser 'ASC' o 'DESC'"),
+  validateFields,
+];

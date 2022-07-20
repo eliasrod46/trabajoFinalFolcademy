@@ -1,39 +1,166 @@
 export default `
-<h1>Desafio 3 - api-productos - conectado a mongoDb con Mongoose</h1>
-<h2>Elias Rodriguez</h2>
-<h3>Iniciar el servidor</h3>
-Para iniciar el server y probar la api seguimos los siguientes pasos en la terminal
-<ul>
-  <li>npm i</li>
-  <li>npm run dev-server</li>
-</ul>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        background-color: grey;
+        margin: 0;
+        padding: 0;
+      }
+      h1 {
+        text-align: center;
+        color: aqua;
+        font-family: "Courier New", Courier, monospace;
+      }
+      h2 {
+        text-align: center;
+        margin-top: 25px;
+        color: aqua;
+        font-family: "Courier New", Courier, monospace;
+      }
+      h3 {
+        text-align: center;
 
-El puerto por defecto es 3001
-<h3>Descripcion de la api</h3>
-<h4>La api cuenta con con 4 endpints, get, post, put, detele</h4>
-<ul>
-  <li>get -> obtener todos los productos</li>
-  <li>post -> agregar un producto(datos por body)</li>
-  <li>put -> editar un producto(indicando id por URL)(datos por body)</li>
-  <li>delete -> eliminar un producto(indicando id por URL)</li>
-</ul>
+        margin-top: 25px;
+        color: rgb(54, 7, 185);
+        font-family: "Courier New", Courier, monospace;
+      }
+      h4 p {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Desafio 4 - crud-productos - conectado a mongoDb con Mongoose</h1>
+    <h2>Info API</h2>
+    <h3>Iniciar el servidor</h3>
+    Para iniciar el server y probar la api seguimos los siguientes pasos en la
+    terminal
+    <ul>
+      <li>npm i</li>
+      <li>npm run dev-server</li>
+    </ul>
 
-<h3>URL</h3>
-<ul>
-  <li>get -> url:port/productos -> ej. localhost:3000/productos</li>
-  <li>post -> url:port/productos  -> ej. localhost:3000/productos (formato del body acontinuacion)</li>
-  <li>put -> url:port/productos/:id  -> ej. localhost:3000/productos/:id (ponemos el id del producto a editar)(formato del body acontinuacion)</li>
-  <li>delete -> url:port/productos/:id  -> ej. localhost:3000/productos/:id (ponemos el id del producto a eliminar)</li>
-</ul>
+    El puerto por defecto es 3000
+    <h3>Descripcion de la api</h3>
+    <h4>La api cuenta con con 5 endpints, get, post, put, patch y detele</h4>
+    <ul>
+      <li>
+        get -> obtener todos los usuarios, o traer un usuario por id, username o
+        email
+      </li>
+      <li>post -> agregar un usuario(datos por body)</li>
+      <li>put -> editar un usuario(indicando id por URL)(datos por body)</li>
+      <li>
+        patch -> reemplazar un usuario(indicando id por URL)(datos por body)
+      </li>
+      <li>delete -> eliminar un usuario(indicando id por URL)</li>
+    </ul>
 
-<h3>Formato body</h3>
-<h4>El body tiene 3 atributos(nombre, precio, stock)</h6>
-<h4>Para agregar un producto(post) el parametro nombre es oblicatorio</h4>
-<h4>Para editar, en la url debe indicar el id del producto, y en el body solo el atributo a modificar</h4>
+    <h3>direcciones URL</h3>
+    <ul>
+      <li>Get:</li>
+      <li>get -> url:port/api/V2.0/usuarios -> ej. localhost:3000/usuarios</li>
+      <li>
+        get -> url:port/api/V2.0/usuarios/id/:dato -> ej.
+        localhost:3000/usuarios/id/k546kjjk4563j4kh5jk34
+      </li>
+      <li>
+        get -> url:port/api/V2.0/usuarios/username/:dato -> ej.
+        localhost:3000/usuarios/username/usuario1
+      </li>
+      <li>
+        get -> url:port/api/V2.0/usuarios/email/:dato -> ej.
+        localhost:3000/usuarios/email/usuario1@usuario1.com
+      </li>
+    </ul>
+    <br />
+    <ul>
+      <li>Post:</li>
+      <li>
+        post -> url:port/api/V2.0/usuarios -> ej.
+        localhost:3000/api/V2.0/usuarios (formato del body acontinuacion)
+      </li>
+    </ul>
+    <br />
+    <ul>
+      <li>Put:</li>
+      <li>
+        put -> url:port/api/V2.0/usuarios/id/:dato -> ej.
+        localhost:3000/api/V2.0/usuarios/:k546kjjk4563j4kh5jk34(ponemos el id
+        del usuario a reemplazar)(formato del body acontinuacion)
+      </li>
+      <li>
+        put -> url:port/api/V2.0/usuarios/username/:dato -> ej.
+        localhost:3000/api/V2.0/usuarios/username/usuario1(ponemos el username
+        del usuario a reemplazar)(formato del body acontinuacion)
+      </li>
+      <li>
+        put -> url:port/api/V2.0/usuarios/email/:dato -> ej.
+        localhost:3000/api/V2.0/usuarios/email/usuario1@usuario1.com(ponemos el
+        email del usuario a reemplazar)(formato del body acontinuacion)
+      </li>
+    </ul>
+    <br />
+    <ul>
+      <li>Patch:</li>
+      <li>
+        Patch -> url:port/api/V2.0/usuarios/id/:dato -> ej.
+        localhost:3000/api/V2.0/usuarios/:k546kjjk4563j4kh5jk34(ponemos el id
+        del usuario a editar)(formato del body acontinuacion)
+      </li>
+      <li>
+        Patch -> url:port/api/V2.0/usuarios/username/:dato -> ej.
+        localhost:3000/api/V2.0/usuarios/username/usuario1(ponemos el username
+        del usuario a editar)(formato del body acontinuacion)
+      </li>
+      <li>
+        Patch -> url:port/api/V2.0/usuarios/email/:dato -> ej.
+        localhost:3000/api/V2.0/usuarios/email/usuario1@usuario1.com(ponemos el
+        email del usuario a editar)(formato del body acontinuacion)
+      </li>
+    </ul>
+    <br />
+    <br />
+    <ul>
+      <li>Delete:</li>
+      <li>
+        Delete -> url:port/api/V2.0/usuarios/id/:dato -> ej.
+        localhost:3000/api/V2.0/usuarios/:k546kjjk4563j4kh5jk34(ponemos el id
+        del usuario a eliminar)
+      </li>
+      <li>
+        Delete -> url:port/api/V2.0/usuarios/username/:dato -> ej.
+        localhost:3000/api/V2.0/usuarios/username/usuario1(ponemos el username
+        del usuario a eliminar)
+      </li>
+      <li>
+        Delete -> url:port/api/V2.0/usuarios/email/:dato -> ej.
+        localhost:3000/api/V2.0/usuarios/email/usuario1@usuario1.com(ponemos el
+        email del usuario a eliminar)
+      </li>
+    </ul>
 
-{
-username: "",
-email: "",
-password: ""
-}
+    <h3>Formato body</h3>
+    <p>El body tiene 3 atributos(nombre, precio, stock)</p>
+    <br />
+    { username: "", email: "", password: "" }
+    <h3>Aclaraciones</h3>
+    <h4>
+      Para agregar(post) y reemplazar(put) se deben enviar los tres atributos
+      del body
+    </h4>
+    <h4>Para editar(patch) solo se envia el atributo a modificar</h4>
+    <h4>
+      Para get all(todos los archivos) se puede recibir un querry "orden" para
+      definir si queremos que los elementos se meustren en forma ascendente
+      ("ASC") o descendiente("DESC")
+    </h4>
+  </body>
+</html>
 `;
