@@ -64,7 +64,45 @@ router.post("/", async (req, res) => {
   res.json({ mensaje: `Usuario Agregado con exito con id: ${userSaved._id}` });
 });
 
-// Editar Usuario
+// Eliminar Usuario
+router.delete("/:buscaPor?/:dato?", async (req, res) => {
+  //Recibo valores de params, son dos y son opcionales: buscaPor(id, username, email) y dato(informacion)
+  const { buscaPor, dato } = req.params;
+
+  //declaro variable respuesta
+  let respuesta;
+
+  //switch que determina si se va a seleccionar el usuario a eliminar por: id, username o email
+  switch (buscaPor) {
+    case "id":
+      //id -> traigo el usuario con el id recibido - verifico si recibi algo en dato
+      dato
+        ? (respuesta = await Usuario.delUserById(dato))
+        : (respuesta = "No ingreso ningun id");
+      break;
+
+    case "username":
+      //username -> traigo el usuario con el username recibido - verifico si recibi algo en dato
+      dato
+        ? (respuesta = await Usuario.delUserByUsername(dato))
+        : (respuesta = "No ingreso ningun nombre de usuario");
+      break;
+
+    case "email":
+      //email -> traigo el usuario con el email recibido - verifico si recibi algo en dato
+      dato
+        ? (respuesta = await Usuario.delUserByEmail(dato))
+        : (respuesta = "No ingreso ninguna direccion de email");
+      break;
+
+    default:
+      respuesta = "Parametro no valido";
+      break;
+  }
+  res.json({ mensaje: `${respuesta}` });
+});
+
+// Editar Usuario(modificar)
 router.patch("/:buscaPor?/:dato?", async (req, res) => {
   //Recibo valores de params, son dos y son opcionales: buscaPor(id, username, email) y dato(informacion)
   const { buscaPor, dato } = req.params;
@@ -103,34 +141,34 @@ router.patch("/:buscaPor?/:dato?", async (req, res) => {
   res.json({ mensaje: `${respuesta}` });
 });
 
-// Eliminar Usuario
-router.delete("/:buscaPor?/:dato?", async (req, res) => {
+// Editar Usuario(reemplazar)
+router.put("/:buscaPor?/:dato?", async (req, res) => {
   //Recibo valores de params, son dos y son opcionales: buscaPor(id, username, email) y dato(informacion)
   const { buscaPor, dato } = req.params;
 
   //declaro variable respuesta
   let respuesta;
 
-  //switch que determina si se va a seleccionar el usuario a eliminar por: id, username o email
+  //switch que determina si se va a seleccionar el usuario a editar por: id, username o email
   switch (buscaPor) {
     case "id":
       //id -> traigo el usuario con el id recibido - verifico si recibi algo en dato
       dato
-        ? (respuesta = await Usuario.delUserById(dato))
+        ? (respuesta = await Usuario.replaceUserById(dato, req.body))
         : (respuesta = "No ingreso ningun id");
       break;
 
     case "username":
       //username -> traigo el usuario con el username recibido - verifico si recibi algo en dato
       dato
-        ? (respuesta = await Usuario.delUserByUsername(dato))
+        ? (respuesta = await Usuario.replaceUserByUsername(dato, req.body))
         : (respuesta = "No ingreso ningun nombre de usuario");
       break;
 
     case "email":
       //email -> traigo el usuario con el email recibido - verifico si recibi algo en dato
       dato
-        ? (respuesta = await Usuario.delUserByEmail(dato))
+        ? (respuesta = await Usuario.replaceUserByEmail(dato, req.body))
         : (respuesta = "No ingreso ninguna direccion de email");
       break;
 
@@ -138,6 +176,7 @@ router.delete("/:buscaPor?/:dato?", async (req, res) => {
       respuesta = "Parametro no valido";
       break;
   }
+
   res.json({ mensaje: `${respuesta}` });
 });
 
