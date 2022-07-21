@@ -19,9 +19,6 @@ app.get("/", (req, res) => {
 });
 
 //---------------------------------use rutas
-// import userRoutes from "./rutas/userRoutes";
-// app.use("/api/v1.0/usuarios", userRoutes);
-
 import userRoutesV2 from "./rutas/userRoutesV2.0";
 app.use("/api/v2.0/usuarios", userRoutesV2);
 

@@ -1,61 +1,79 @@
 // userRoutesV2.0.ts
-
 //---------------------------------/---------------------------------Imports
 import { Router } from "express";
 import * as Usuario from "../controllers/userControllerV2.0";
-import {
-  ValidationQuery,
-  ValidationID,
-  ValidationEmail,
-  ValidationUsername,
-  postValidation,
-  putValidationID,
-  putValidationEmail,
-  putValidationUsername,
-  patchValidationID,
-  patchValidationEmail,
-  patchValidationUsername,
-} from "../helpers/helpersValidators";
+import * as validationHelpers from "../helpers/helpersValidators";
+
 //---------------------------------/---------------------------------instancio router
 const router = Router();
 
-//---------------------------------/---------------------------------Rutas
-
 //--------------------------------- Rutas Get
 
-router.get("/", ValidationQuery, Usuario.getAllUsers); //Todos los usuarios
-router.get("/id/:dato", ValidationID, Usuario.getUserById); //Usuario por id
-router.get("/username/:dato", ValidationUsername, Usuario.getUserByUsername); //Usuario por username
-router.get("/email/:dato", ValidationEmail, Usuario.getUserByEmail); //Usuario por email
+router.get("/", validationHelpers.ValidationQuery, Usuario.getAllUsers); //Todos los usuarios
+router.get("/id/:dato", validationHelpers.ValidationID, Usuario.getUserById); //Usuario por id
+router.get(
+  "/username/:dato",
+  validationHelpers.ValidationUsername,
+  Usuario.getUserByUsername
+); //Usuario por username
+router.get(
+  "/email/:dato",
+  validationHelpers.ValidationEmail,
+  Usuario.getUserByEmail
+); //Usuario por email
 
 //--------------------------------- Rutas Post
 
-router.post("/", postValidation, Usuario.addUser); //Agregar usuario
+router.post("/", validationHelpers.postValidation, Usuario.addUser); //Agregar usuario
 
 //--------------------------------- Rutas Delete
 
-router.delete("/id/:dato", ValidationID, Usuario.delUserById); //Eliminar usuario por id
-router.delete("/username/:dato", ValidationUsername, Usuario.delUserByUsername); //Eliminar usuario por username
-router.delete("/email/:dato", ValidationEmail, Usuario.delUserByEmail); //Eliminar usuario por email
+router.delete("/id/:dato", validationHelpers.ValidationID, Usuario.delUserById); //Eliminar usuario por id
+router.delete(
+  "/username/:dato",
+  validationHelpers.ValidationUsername,
+  Usuario.delUserByUsername
+); //Eliminar usuario por username
+router.delete(
+  "/email/:dato",
+  validationHelpers.ValidationEmail,
+  Usuario.delUserByEmail
+); //Eliminar usuario por email
 
 //--------------------------------- Rutas patch(modificar)
 
-router.patch("/id/:dato", patchValidationID, Usuario.editUserById); //Editar usuario por id
+router.patch(
+  "/id/:dato",
+  validationHelpers.patchValidationID,
+  Usuario.editUserById
+); //Editar usuario por id
 router.patch(
   "/username/:dato",
-  patchValidationUsername,
+  validationHelpers.patchValidationUsername,
   Usuario.editUserByUsername
 ); //Editar usuario por username
-router.patch("/email/:dato", patchValidationEmail, Usuario.editUserByEmail); //Editar usuario por email
+router.patch(
+  "/email/:dato",
+  validationHelpers.patchValidationEmail,
+  Usuario.editUserByEmail
+); //Editar usuario por email
 
 //--------------------------------- Rutas put(reemplazar)
 
-router.put("/id/:dato", putValidationID, Usuario.replaceUserById); //Reemplazar usuario por id
+router.put(
+  "/id/:dato",
+  validationHelpers.putValidationID,
+  Usuario.replaceUserById
+); //Reemplazar usuario por id
 router.put(
   "/username/:dato",
-  putValidationEmail,
+  validationHelpers.putValidationUsername,
   Usuario.replaceUserByUsername
 ); //Reemplazar usuario por username
-router.put("/email/:dato", putValidationUsername, Usuario.replaceUserByEmail); //Reemplazar usuario por email
+router.put(
+  "/email/:dato",
+  validationHelpers.putValidationEmail,
+  Usuario.replaceUserByEmail
+); //Reemplazar usuario por email
 
 export default router;

@@ -1,6 +1,8 @@
+// validateFields.ts
 import { Request, Response, NextFunction } from "express";
 import { validationResult } from "express-validator";
 
+//Verifica si hay errores capturados
 export const validateFields = async (
   req: Request,
   res: Response,

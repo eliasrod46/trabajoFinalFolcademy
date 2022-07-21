@@ -186,12 +186,16 @@ export const replaceUserById = async (req: any, res: any) => {
         { _id: dato },
         req.body
       );
-      return `El producto con id: ${respuesta._id} ha sido reemplazado`;
+      res.json({
+        respuesta: `El producto con id: ${respuesta._id} ha sido reemplazado`,
+      });
     } else {
       //instancio un modelo UserModel con los datos recibidos y lo guardo
       const newUser = new UserModel(req.body);
       await newUser.save();
-      return `No se contro el producto con id: ${dato}, se ha agregado a la lista con id: ${newUser._id}`;
+      res.json({
+        respuesta: `No se contro el producto con id: ${dato}, se ha agregado a la lista con id: ${newUser._id}`,
+      });
     }
   } catch (error) {
     res.status(404).send(`Error al reemplazar el usuario por id: ${error}`);
@@ -214,12 +218,16 @@ export const replaceUserByUsername = async (req: any, res: any) => {
         { username: dato },
         req.body
       );
-      return `El producto con id: ${respuesta._id} ha sido reemplazado`;
+      res.json({
+        respuesta: `El producto con el username: ${respuesta.username} ha sido reemplazado`,
+      });
     } else {
       //instancio un modelo UserModel con los datos recibidos y lo guardo
       const newUser = new UserModel(req.body);
       await newUser.save();
-      return `No se contro el producto con username: ${dato}, se ha agregado a la lista con el username: ${newUser.username}`;
+      res.json({
+        respuesta: `No se contro el producto con username: ${dato}, se ha agregado a la lista con el username: ${newUser.username}`,
+      });
     }
   } catch (error) {
     res
@@ -244,12 +252,16 @@ export const replaceUserByEmail = async (req: any, res: any) => {
         { email: dato },
         req.body
       );
-      return `El producto con id: ${respuesta._id} ha sido reemplazado`;
+      res.json({
+        respuesta: `El producto con el email: ${respuesta.email} ha sido reemplazado`,
+      });
     } else {
       //instancio un modelo UserModel con los datos recibidos y lo guardo
       const newUser = new UserModel(req.body);
       await newUser.save();
-      return `No se contro el producto con email: ${dato}, se ha agregado a la lista con el email: ${newUser.email}`;
+      res.json({
+        respuesta: `No se contro el producto con email: ${dato}, se ha agregado a la lista con el email: ${newUser.email}`,
+      });
     }
   } catch (error) {
     res.status(404).send(`Error al reemplazar el usuario por email: ${error}`);
