@@ -6,7 +6,9 @@
 # Node artifact files
 node_modules/
 dist/
-v4.0.d/
+
+# Variables de entorno
+.env
 
 # Compiled Java class files
 *.class

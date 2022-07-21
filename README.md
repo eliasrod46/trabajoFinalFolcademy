@@ -70,4 +70,4 @@ El puerto por defecto es 3000
 
 #### Para editar(patch) solo se envia el atributo a modificar
 
-#### Para get all(todos los archivos) se puede recibir un querry "orden" para definir si queremos que los elementos se meustren en forma ascendente ("ASC") o descendiente("DESC")
+#### Para get all(todos los archivos) se puede recibir un querry "orden" para definir si queremos que los elementos se muestren en forma ascendente ("ASC") o descendente("DESC")

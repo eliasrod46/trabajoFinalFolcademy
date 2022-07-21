@@ -154,7 +154,7 @@ export const ValidationQuery = [
   check("atributo")
     .isString()
     .withMessage("El username debe ser tipo string")
-    .isIn(["username", "email"])
-    .withMessage("El order debe ser 'ASC' o 'DESC'"),
+    .isIn(["username", "email", "id"])
+    .withMessage("El atributo debe ser 'username', 'email', 'id'"),
   validateFields,
 ];

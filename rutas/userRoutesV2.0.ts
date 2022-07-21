@@ -3,9 +3,8 @@
 //---------------------------------/---------------------------------Imports
 import { Router } from "express";
 import * as Usuario from "../controllers/userControllerV2.0";
-import { body, param, query, validationResult } from "express-validator";
-import { validateFields } from "../helpers/validateFields";
 import {
+  ValidationQuery,
   ValidationID,
   ValidationEmail,
   ValidationUsername,
@@ -24,7 +23,7 @@ const router = Router();
 
 //--------------------------------- Rutas Get
 
-router.get("/", Usuario.getAllUsers); //Todos los usuarios
+router.get("/", ValidationQuery, Usuario.getAllUsers); //Todos los usuarios
 router.get("/id/:dato", ValidationID, Usuario.getUserById); //Usuario por id
 router.get("/username/:dato", ValidationUsername, Usuario.getUserByUsername); //Usuario por username
 router.get("/email/:dato", ValidationEmail, Usuario.getUserByEmail); //Usuario por email

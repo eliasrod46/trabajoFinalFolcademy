@@ -8,21 +8,17 @@ import UserModel from "../models/userModel";
 export const getAllUsers = async (req: any, res: any) => {
   //metodo find() sin filtro trae todos los doc de la coleccion
   try {
-    let order = "ASC";
-    let atributo = "id";
-    if (req.query.order) {
-      order = req.query.order;
-    }
-    if (req.query.atributo) {
-      atributo = req.query.atributo;
-    }
+    const order: string = req.query.order;
+    const atributo: string = req.query.atributo;
+
+    let sort: any = {};
+    sort[atributo] = order;
+
     res.json({
-      Respuesta: await UserModel.find({}, "username email").sort({
-        atributo: order,
-      }),
+      Respuesta: await UserModel.find({}, "username email id").sort(sort),
     });
   } catch (error) {
-    console.log(`Error al traer todos los usuarios: ${error}`);
+    res.status(404).send(`Error al traer todos los usuarios: ${error}`);
   }
 };
 
@@ -35,7 +31,7 @@ export const getUserById = async (req: any, res: any) => {
       Respuesta: await UserModel.find({ _id: dato }, "username email"),
     });
   } catch (error) {
-    console.log(`Error al traer el usuario por id : ${error}`);
+    res.status(404).send(`Error al traer el usuario por id : ${error}`);
   }
 };
 
@@ -48,7 +44,7 @@ export const getUserByUsername = async (req: any, res: any) => {
       Respuesta: await UserModel.find({ username: dato }, "username email"),
     });
   } catch (error) {
-    console.log(`Error al traer el usuario por username : ${error}`);
+    res.status(404).send(`Error al traer el usuario por username : ${error}`);
   }
 };
 
@@ -61,7 +57,7 @@ export const getUserByEmail = async (req: any, res: any) => {
       Respuesta: await UserModel.find({ email: dato }, "username email"),
     });
   } catch (error) {
-    console.log(`Error al traer el usuario por email : ${error}`);
+    res.status(404).send(`Error al traer el usuario por email : ${error}`);
   }
 };
 
@@ -74,7 +70,7 @@ export const addUser = async (req: any, res: any) => {
     await newUser.save();
     res.json({ mensaje: `Usuario Agregado con exito con id: ${newUser._id}` });
   } catch (error) {
-    console.log(`Error al cargar nuevo usuario: ${error}`);
+    res.status(404).send(`Error al cargar nuevo usuario: ${error}`);
   }
 };
 
@@ -92,7 +88,7 @@ export const delUserById = async (req: any, res: any) => {
         : "No se encontro el usuario con el id ingresado";
     res.json({ respuesta: resp });
   } catch (error) {
-    console.log(`Error al eliminar usuario por id: ${error}`);
+    res.status(404).send(`Error al eliminar usuario por id: ${error}`);
   }
 };
 
@@ -108,7 +104,7 @@ export const delUserByUsername = async (req: any, res: any) => {
         : "No se encontro el usuario con el username ingresado";
     res.json({ respuesta: resp });
   } catch (error) {
-    console.log(`Error al eliminar usuario por username: ${error}`);
+    res.status(404).send(`Error al eliminar usuario por username: ${error}`);
   }
 };
 
@@ -124,7 +120,7 @@ export const delUserByEmail = async (req: any, res: any) => {
         : "No se encontro el usuario con el email ingresado";
     res.json({ respuesta: resp });
   } catch (error) {
-    console.log(`Error al eliminar usuario por email: ${error}`);
+    res.status(404).send(`Error al eliminar usuario por email: ${error}`);
   }
 };
 
@@ -140,7 +136,7 @@ export const editUserById = async (req: any, res: any) => {
     const resp = `Se encontraron ${respuesta.matchedCount} usuarios y se modificaron ${respuesta.modifiedCount}`;
     res.json({ respuesta: resp });
   } catch (error) {
-    console.log(`Error al editar el usuario por id: ${error}`);
+    res.status(404).send(`Error al editar el usuario por id: ${error}`);
   }
 };
 
@@ -154,7 +150,7 @@ export const editUserByUsername = async (req: any, res: any) => {
     const resp = `Se encontraron ${respuesta.matchedCount} usuarios y se modificaron ${respuesta.modifiedCount}`;
     res.json({ respuesta: resp });
   } catch (error) {
-    console.log(`Error al editar el usuario por username: ${error}`);
+    res.status(404).send(`Error al editar el usuario por username: ${error}`);
   }
 };
 
@@ -168,7 +164,7 @@ export const editUserByEmail = async (req: any, res: any) => {
     const resp = `Se encontraron ${respuesta.matchedCount} usuarios y se modificaron ${respuesta.modifiedCount}`;
     res.json({ respuesta: resp });
   } catch (error) {
-    console.log(`Error al editar el usuario por email: ${error}`);
+    res.status(404).send(`Error al editar el usuario por email: ${error}`);
   }
 };
 
@@ -198,7 +194,7 @@ export const replaceUserById = async (req: any, res: any) => {
       return `No se contro el producto con id: ${dato}, se ha agregado a la lista con id: ${newUser._id}`;
     }
   } catch (error) {
-    console.log(`Error al reemplazar el usuario por id: ${error}`);
+    res.status(404).send(`Error al reemplazar el usuario por id: ${error}`);
   }
 };
 
@@ -226,7 +222,9 @@ export const replaceUserByUsername = async (req: any, res: any) => {
       return `No se contro el producto con username: ${dato}, se ha agregado a la lista con el username: ${newUser.username}`;
     }
   } catch (error) {
-    console.log(`Error al reemplazar el usuario por username: ${error}`);
+    res
+      .status(404)
+      .send(`Error al reemplazar el usuario por username: ${error}`);
   }
 };
 
@@ -254,6 +252,6 @@ export const replaceUserByEmail = async (req: any, res: any) => {
       return `No se contro el producto con email: ${dato}, se ha agregado a la lista con el email: ${newUser.email}`;
     }
   } catch (error) {
-    console.log(`Error al reemplazar el usuario por email: ${error}`);
+    res.status(404).send(`Error al reemplazar el usuario por email: ${error}`);
   }
 };

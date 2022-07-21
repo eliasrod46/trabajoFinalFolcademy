@@ -1,6 +1,7 @@
 // server.ts
 //---------------------------------/---------------------------------Imports
 import express from "express";
+require("dotenv").config();
 require("./mongoConn");
 
 //---------------------------------Instanciamos el server de express
@@ -25,7 +26,7 @@ import userRoutesV2 from "./rutas/userRoutesV2.0";
 app.use("/api/v2.0/usuarios", userRoutesV2);
 
 //-----------------------------------------------------------Levanto el Server
-const port = 3000;
+const port = process.env.PORT;
 app.listen(port, () => {
   console.log(`Servidor escuchando en http://localhost:${port}`);
 });
