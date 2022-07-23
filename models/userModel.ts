@@ -9,10 +9,27 @@ const UserSchema = new Schema({
     require: true,
     unique: true,
   },
+  nombre: {
+    type: String,
+    require: true,
+  },
+  apellido: {
+    type: String,
+    require: true,
+  },
   email: {
     type: String,
     require: true,
     unique: true,
+  },
+  telefono: {
+    type: String,
+  },
+  edad: {
+    type: Number,
+  },
+  direccion: {
+    type: String,
   },
   password: {
     type: String,

@@ -44,7 +44,7 @@ router.delete(
 
 router.patch(
   "/id/:dato",
-  validationHelpers.patchValidationID,
+  validationHelpers.patchValidation,
   Usuario.editUserById
 ); //Editar usuario por id
 router.patch(

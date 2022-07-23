@@ -15,7 +15,7 @@ export const getAllUsers = async (req: any, res: any) => {
     sort[atributo] = order;
 
     res.json({
-      Respuesta: await UserModel.find({}, "username email id").sort(sort),
+      Respuesta: await UserModel.find().sort(sort),
     });
   } catch (error) {
     res.status(404).send(`Error al traer todos los usuarios: ${error}`);

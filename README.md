@@ -54,20 +54,25 @@ El puerto por defecto es 3000
 
 ### Formato body
 
-###### El body tiene 3 atributos(nombre, precio, stock)
+###### El body tiene 8 atributos, de los cuales 5(username,nombre,apellido,email y password) son obligatorios y 2 son unicos(username y email)por que que no puede existir dos iguales en la bbdd
 
 ```
 {
- username: "",
- email: "",
- password: ""
+	"username": "",
+	"nombre": "",
+	"apellido": "",
+	"email": "",
+	"telefono": "",
+	"edad": ,
+	"direccion": "",
+	"password": ""
 }
 ```
 
 ### Aclaraciones
 
-#### Para agregar(post) y reemplazar(put) se deben enviar los tres atributos del body
+#### Para agregar(post), reemplazar(put) editar(patch) se deben enviar los 5 atributos obligatorios (username,nombre,apellido,email y password) los otros pueden no enviarse
 
-#### Para editar(patch) solo se envia el atributo a modificar
+#### Al editar modificamos un usuario y si no encontramos el usuario a modificar el sistema no hace anda nada y reemplazar zambia todo el bloque y si no encuentra al usaurio a reemplazar lo agrega
 
 #### Para get all(todos los archivos) se puede recibir un querry "orden" para definir si queremos que los elementos se muestren en forma ascendente ("ASC") o descendente("DESC")

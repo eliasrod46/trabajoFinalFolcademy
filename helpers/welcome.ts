@@ -149,15 +149,26 @@ export default `
     </ul>
 
     <h3>Formato body</h3>
-    <p>El body tiene 3 atributos(nombre, precio, stock)</p>
+    <p>El body tiene 8 atributos, de los cuales 5(username,nombre,apellido,email y password) son obligatorios y 2 son unicos(username y email)por que que no puede existir dos iguales en la bbdd</p>
     <br />
-    { username: "", email: "", password: "" }
+    {
+      "username": "",
+      "nombre": "",
+      "apellido": "",
+      "email": "",
+      "telefono": "",
+      "edad": ,
+      "direccion": "",
+      "password": ""
+    }
     <h3>Aclaraciones</h3>
     <h4>
-      Para agregar(post) y reemplazar(put) se deben enviar los tres atributos
-      del body
+      Para agregar(post), reemplazar(put) editar(patch) se deben enviar los 5 atributos obligatorios (username,nombre,apellido,email y password) los otros pueden no enviarse
     </h4>
-    <h4>Para editar(patch) solo se envia el atributo a modificar</h4>
+    <h4>
+      Al editar modificamos un usuario y si no encontramos el usuario a modificar el sistema no hace anda nada y reemplazar zambia todo el bloque y si no encuentra al usaurio a reemplazar lo agrega
+    </h4>
+    
     <h4>
       Para get all(todos los archivos) se puede recibir un querry "orden" para
       definir si queremos que los elementos se meustren en forma ascendente

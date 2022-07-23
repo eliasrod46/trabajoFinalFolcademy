@@ -9,6 +9,7 @@ import { validateFields } from "./validateFields";
 export const ValidationID = [
   //delete id
   check("dato")
+    .trim()
     .isMongoId()
     .withMessage("El id debe tener el formato de id de mongoDB"),
   validateFields,
@@ -16,13 +17,19 @@ export const ValidationID = [
 
 export const ValidationEmail = [
   //delete email
-  check("dato").isEmail().withMessage("El email debe tener el formato valido"),
+  check("dato")
+    .trim()
+    .isEmail()
+    .withMessage("El email debe tener el formato valido"),
   validateFields,
 ];
 
 export const ValidationUsername = [
   //delete username
-  check("dato").isString().withMessage("El username debe ser tipo string"),
+  check("dato")
+    .trim()
+    .isString()
+    .withMessage("El username debe ser tipo string"),
   validateFields,
 ];
 
@@ -30,6 +37,7 @@ export const ValidationUsername = [
 export const ValidationQuery = [
   //delete username
   check("order")
+    .trim()
     .toUpperCase()
     .isString()
     .withMessage("El query order debe ser tipo string")
@@ -37,18 +45,35 @@ export const ValidationQuery = [
     .withMessage("El query order debe ser 'ASC' o 'DESC'"),
 
   check("atributo")
+    .trim()
     .toLowerCase()
     .isString()
     .withMessage("El query atributo debe ser tipo string")
     .isIn(["username", "email", "id"])
-    .withMessage("El  query atributo debe ser 'username', 'email', 'id'"),
+    .withMessage(
+      "El  query atributo debe ser 'username', 'email', 'nombre', 'apelllido"
+    ),
   validateFields,
 ];
 
 //Post (Valida el body de las peticiones post)
 export const postValidation = [
+  //nombre
+  check("nombre", "EL nombre debe contener algun valor y ser  un texto")
+    .trim()
+    .toUpperCase()
+    .isLength({ min: 1 })
+    .isString(),
+  //apellido
+  check("apellido", "EL apellido debe contener algun valor y ser  un texto")
+    .trim()
+    .toUpperCase()
+    .isLength({ min: 1 })
+    .isString(),
+
   //username
   check("username")
+    .trim()
     .toLowerCase()
     .matches(/\w/)
     .withMessage("El nombre de usuario debe contener a-z, 0-9 o _")
@@ -57,6 +82,7 @@ export const postValidation = [
 
   //email
   check("email", "EL email debe tener un formato valido")
+    .trim()
     .toLowerCase()
     .isEmail()
     .normalizeEmail(),
@@ -72,6 +98,19 @@ export const postValidation = [
 //Put
 //(Valida el body de las peticiones put)
 export const putValidation = [
+  //nombre
+  check("nombre", "EL nombre debe contener algun valor y ser  un texto")
+    .trim()
+    .toUpperCase()
+    .isLength({ min: 1 })
+    .isString(),
+  //apellido
+  check("apellido", "EL apellido debe contener algun valor y ser  un texto")
+    .trim()
+    .toUpperCase()
+    .isLength({ min: 1 })
+    .isString(),
+
   //username
   check("username")
     .toLowerCase()
@@ -124,8 +163,22 @@ export const putValidationUsername = [
 //patch
 //(Valida el body de las peticiones patch)
 export const patchValidation = [
-  //username
   oneOf([
+    //nombre
+    check("nombre", "EL nombre debe contener algun valor y ser  un texto")
+      .trim()
+      .toUpperCase()
+      .isLength({ min: 1 })
+      .isString(),
+
+    //apellido
+    check("apellido", "EL apellido debe contener algun valor y ser  un texto")
+      .trim()
+      .toUpperCase()
+      .isLength({ min: 1 })
+      .isString(),
+
+    //username
     check("username")
       .toLowerCase()
       .matches(/\w/)
