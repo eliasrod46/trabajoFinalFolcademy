@@ -1,5 +1,4 @@
 // helpersValidation.ts
-import { NextFunction } from "express";
 import { check, oneOf } from "express-validator";
 import { validateFields } from "./validateFields";
 

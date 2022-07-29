@@ -13,17 +13,30 @@ app.use(express.json());
 //---------------------------------/---------------------------------Rutas
 
 //---------------------------------Ruta raiz
-import apiHowToUse from "./helpers/welcome";
+
 app.get("/", (req, res) => {
-  res.send(apiHowToUse);
+  res.json({
+    name: "practica Backend ApiREST",
+    author: "Elias Rodriguez",
+    description: "BackPracticaFolcademy",
+    version: "1.0.0",
+  });
 });
 
-//---------------------------------use rutas
-import userRoutesV2 from "./rutas/userRoutesV2.0";
-app.use("/api/v2.0/usuarios", userRoutesV2);
+//---------------------------------user
+import userRoutes from "./routes/user.routes";
+app.use("/api/usuarios", userRoutes);
+
+//---------------------------------products
+import productRoutes from "./routes/product.routes";
+app.use("/api/productos", productRoutes);
+
+//---------------------------------auth
+import authRoutes from "./auth/auth.routes";
+app.use("/api/auth", authRoutes);
 
 //-----------------------------------------------------------Levanto el Server
-const port = process.env.PORT;
+const port = process.env.PORT_SERVER;
 app.listen(port, () => {
-  console.log(`Servidor escuchando en http://localhost:${port}`);
+  console.log(`Servidor escuchando en puerto: ${port}`);
 });
