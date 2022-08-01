@@ -40,5 +40,4 @@ const port = (process.env.PORT_SERVER as unknown as number) || 5000;
 const host = process.env.HOST || '0.0.0.0';
 
 app.listen(port, host, () => {
-  console.info('Servidor escuchando' + port);
-});
+  console.info('Servidor escuchando en http://localhost:' + port) })
