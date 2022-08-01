@@ -34,7 +34,9 @@ app.use("/api/productos", productRoutes);
 app.use("/api/auth", authRoutes);
 
 //-----------------------------------------------------------Levanto el Server
-const port = process.env.PORT_SERVER;
-app.listen(port, () => {
+
+const port = Number(process.env.PORT_SERVER) || 3000;
+const host = process.env.HOST || "0.0.0.0";
+app.listen(port, host, () => {
   console.log(`Servidor escuchando en puerto: ${port}`);
 });

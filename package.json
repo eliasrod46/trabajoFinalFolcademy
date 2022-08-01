@@ -4,7 +4,8 @@
   "description": "**Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**",
   "main": "./dist/server.js",
   "scripts": {
-    "dev-server": "tsc-watch --noClear -p ./tsconfig.json --onSuccess \"node ./dist/server.js\""
+    "dev-server": "tsc-watch --noClear -p ./tsconfig.json --onSuccess \"node ./dist/server.js\"",
+    "start": "tsc && node ./dist/server.js"
   },
   "repository": {
     "type": "git",
