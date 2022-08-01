@@ -1,9 +1,8 @@
-// userModel.ts
+// User.ts
 //---------------------------------/---------------------------------Imports
 const { Schema, model } = require("mongoose");
-import UserInterface from "./user.interface";
-
 const bcrypt = require("bcrypt");
+
 //---------------------------------/---------------------------------Creamos el Schema
 const UserSchema = new Schema(
   {

@@ -1,13 +1,12 @@
-// userController.ts
+// user.controller.ts
 //---------------------------------/---------------------------------Imports
 import User from "../models/User";
-import UserInterfase from "../models/user.interface";
+import UserInterface from "../models/user.interface";
 
 //---------------------------------/--------------------------------- Funciones
 
 //Obtener Todos Los usuarios
 export const getAll = async (req: any, res: any) => {
-  //metodo find() sin filtro trae todos los doc de la coleccion
   try {
     const order: string = req.query.order;
     const atributo: string = req.query.atributo;
@@ -23,6 +22,38 @@ export const getAll = async (req: any, res: any) => {
   }
 };
 
+//Agregar un usuario
+export const add = async (req: any, res: any) => {
+  //metodo find() sin filtro trae todos los doc de la coleccion
+  try {
+    const {
+      username,
+      nombre,
+      apellido,
+      email,
+      telefono,
+      edad,
+      direccion,
+      password,
+    } = req.body;
+
+    let user: UserInterface = new User({
+      username,
+      nombre,
+      apellido,
+      email,
+      telefono,
+      edad,
+      direccion,
+      password: await User.encryptPassword(password),
+    });
+    await user.save();
+    res.json({ message: "User Created Successful" });
+  } catch (error) {
+    res.status(400).json({ message: `Fail to create user: ${error}` });
+  }
+};
+
 //Obtener usuario por id
 export const getById = async (req: any, res: any) => {
   try {
@@ -31,19 +62,7 @@ export const getById = async (req: any, res: any) => {
       Respuesta: await User.findById(id, "username email"),
     });
   } catch (error) {
-    res.status(404).send(`Error al traer el usuario por id : ${error}`);
-  }
-};
-
-//Obtener Todos Los usuarios
-export const add = async (req: any, res: any) => {
-  //metodo find() sin filtro trae todos los doc de la coleccion
-  try {
-    const newUser = new User(req.body);
-    newUser.save();
-    res.send("ando");
-  } catch (error) {
-    res.status(404).send(`Error al traer todos los usuarios: ${error}`);
+    res.status(404).send(`Fail to get user: ${error}`);
   }
 };
 
@@ -52,11 +71,32 @@ export const editById = async (req: any, res: any) => {
   try {
     //Actualizo el usuario con el id recibido
     const { id } = req.params;
-    await User.findByIdAndUpdate(id, req.body);
+    let {
+      username,
+      nombre,
+      apellido,
+      email,
+      telefono,
+      edad,
+      direccion,
+      password,
+    } = req.body;
+    password = await User.encryptPassword(password);
 
-    res.json({ respuesta: "Se Modifico el usuario indicado" });
+    await User.findByIdAndUpdate(id, {
+      username,
+      nombre,
+      apellido,
+      email,
+      telefono,
+      edad,
+      direccion,
+      password,
+    });
+
+    res.json({ respuesta: "User Updated Successful" });
   } catch (error) {
-    res.status(404).send(`Error al editar el usuario por id: ${error}`);
+    res.status(404).json({ message: `Fail to update user: ${error}` });
   }
 };
 
@@ -65,9 +105,9 @@ export const delById = async (req: any, res: any) => {
   try {
     const { id } = req.params;
     const respuesta = await User.findByIdAndDelete(id);
-    if (!respuesta) return res.json({ message: "Fail to delete user" });
-    res.json({ message: "User deleted successfull" });
+    if (!respuesta) return res.status(403).json({ message: "User not found" });
+    res.json({ message: "User Deleted Successful" });
   } catch (error) {
-    res.status(404).send(`Error al eliminar usuario por id: ${error}`);
+    res.status(404).json({ message: "Fail to delete user" });
   }
 };

@@ -19,20 +19,18 @@ app.get("/", (req, res) => {
     name: "practica Backend ApiREST",
     author: "Elias Rodriguez",
     description: "BackPracticaFolcademy",
-    version: "1.0.0",
+    version: "1.5.0",
   });
 });
 
-//---------------------------------user
+//---------------------------------rutas imports
+import authRoutes from "./routes/auth.routes";
 import userRoutes from "./routes/user.routes";
-app.use("/api/usuarios", userRoutes);
-
-//---------------------------------products
 import productRoutes from "./routes/product.routes";
-app.use("/api/productos", productRoutes);
 
-//---------------------------------auth
-import authRoutes from "./auth/auth.routes";
+//---------------------------------rutas
+app.use("/api/usuarios", userRoutes);
+app.use("/api/productos", productRoutes);
 app.use("/api/auth", authRoutes);
 
 //-----------------------------------------------------------Levanto el Server

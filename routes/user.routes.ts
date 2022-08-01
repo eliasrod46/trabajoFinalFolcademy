@@ -1,19 +1,40 @@
-// userRoutesV2.0.ts
+// user.routes.ts
 //---------------------------------/---------------------------------Imports
 import { Router } from "express";
 import * as userCnlr from "../controllers/user.controller";
-import * as validateReq from "../helpers/helpersValidators";
-import * as authValidator from "../auth/auth.middleware";
+//middlewares
+import * as userInputValidator from "../middlewares/user.validators";
+import * as authValidator from "../middlewares/auth.middleware";
 
 //---------------------------------/---------------------------------instancio router
 const router = Router();
 
-//--------------------------------- Rutas Get
+//--------------------------------- Rutas
 
-router.get("/", authValidator.verifyToken, userCnlr.getAll); //Todos los usuarios
-router.get("/:id", userCnlr.getById); //Usuario por id
-router.post("/", userCnlr.add); //Eliminar usuario por id
-router.delete("/:id", userCnlr.delById); //Eliminar usuario por id
-router.put("/:id", userCnlr.editById); //Editar usuario por id
+router.get("/", userCnlr.getAll); //Todos los usuarios
+
+router.post(
+  "/",
+  [authValidator.verifyToken, ...userInputValidator.postPutValidation],
+  userCnlr.add
+); //Agregar Usuario
+
+router.get("/:id", userInputValidator.mongoIdValidation, userCnlr.getById); //Usuario por id
+
+router.put(
+  "/:id",
+  [
+    authValidator.verifyToken,
+    ...userInputValidator.postPutValidation,
+    ...userInputValidator.mongoIdValidation,
+  ],
+  userCnlr.editById
+); //Editar usuario por id
+
+router.delete(
+  "/:id",
+  [authValidator.verifyToken, ...userInputValidator.mongoIdValidation],
+  userCnlr.delById
+); //Eliminar usuario por id
 
 export default router;

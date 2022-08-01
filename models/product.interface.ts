@@ -1,17 +1,13 @@
-// user.interface.ts
+// product.interface.ts
 //---------------------------------/---------------------------------Imports
 import { Document } from "mongoose";
 
 //---------------------------------/---------------------------------Creamos el Schema
 interface UserInterface extends Document {
   nombre: string;
-  email: string;
-  password: string;
-  edad: number;
-  direccion: String;
-  telefono: String;
-  apellido: String;
-  username: String;
+  description: string;
+  precio: number;
+  stock: number;
 }
 
 export default UserInterface;

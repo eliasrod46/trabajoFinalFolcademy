@@ -10,7 +10,7 @@ export const login = async (
 ) => {
   try {
     const userFound = await User.findOne({ email: req.body.email });
-    // if (!userFound) return res.status(400).json({ message: "User Not found" });
+    if (!userFound) return res.status(400).json({ message: "User Not found" });
 
     const machPassword = await User.validatePassword(
       req.body.password,
@@ -28,7 +28,12 @@ export const login = async (
         expiresIn: expira,
       }
     );
-    res.header("auth-token", token).json({ user: userFound.username, token });
+
+    res.header("auth-token", token).json({
+      message: "User Logged Successful",
+      user: userFound.username,
+      token,
+    });
   } catch (error) {
     res.status(404).send(`${error}`);
   }
@@ -70,7 +75,7 @@ export const signup = async (
         expiresIn: process.env.JWT_EXPIRATION, //24hs
       }
     );
-    res.json({ token });
+    res.json({ message: "User Created Successful", token });
   } catch (error) {
     return next(error);
   }

@@ -1,6 +1,6 @@
 {
   "name": "eliasfolcademy",
-  "version": "1.0.0",
+  "version": "1.5.0",
   "description": "**Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**",
   "main": "./dist/server.js",
   "scripts": {

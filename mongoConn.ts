@@ -1,7 +1,7 @@
 // mongoConn.ts
 //---------------------------------/---------------------------------Imports
 
-const mongoose = require("mongoose");
+const mongoose: any = require("mongoose");
 
 //---------------------------------/---------------------------------Creamos conexion con la BBDD
 mongoose.connect(process.env.URL_DB, { useNewUrlParser: true }, (err: any) => {
