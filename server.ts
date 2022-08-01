@@ -1,7 +1,8 @@
 // server.ts
 //---------------------------------/---------------------------------Imports
 import express from "express";
-require("dotenv").config();
+import dotenv from "dotenv"
+dotenv.config();
 require("./mongoConn");
 
 //---------------------------------Instanciamos el server de express
@@ -14,7 +15,7 @@ app.use(express.json());
 
 //---------------------------------Ruta raiz
 
-app.get("/", (req, res) => {
+app.get("/", (req:any, res:any) => {
   res.json({
     name: "practica Backend ApiREST",
     author: "Elias Rodriguez",
