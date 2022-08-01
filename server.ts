@@ -38,5 +38,5 @@ app.use("/api/auth", authRoutes);
 const port = Number(process.env.PORT_SERVER) || 3000;
 const host = process.env.HOST || "0.0.0.0";
 app.listen(port, host, () => {
-  console.log(`Servidor escuchando en puerto: ${port}`);
+  console.log(`Servidor escuchando en puertso: ${port}`);
 });
