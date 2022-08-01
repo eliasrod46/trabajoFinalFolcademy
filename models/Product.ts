@@ -31,4 +31,4 @@ const UserSchema = new Schema(
 
 //---------------------------------/---------------------------------Creamos y exportamos el Model
 
-export default model(process.env.COLECCION, UserSchema);
+export default model(process.env.COLECCION_PRODUCT, UserSchema);

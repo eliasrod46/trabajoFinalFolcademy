@@ -72,4 +72,4 @@ UserSchema.statics.validatePassword = async (
 
 //---------------------------------/---------------------------------Creamos y exportamos el Model
 
-export default model(process.env.COLECCION, UserSchema);
+export default model(process.env.COLECCION_USER, UserSchema);
