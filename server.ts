@@ -36,7 +36,7 @@ app.use("/api/auth", authRoutes);
 
 //-----------------------------------------------------------Levanto el Server
 
-const port = (process.env.PORT_SERVER as unknown as number) || 5000;
+const port = (process.env.PORT as unknown as number) || 5000;
 const host = process.env.HOST || '0.0.0.0';
 
 app.listen(port, host, () => {
