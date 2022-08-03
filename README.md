@@ -1,4 +1,4 @@
-# Desafio 4 - crud-productos
+# Proyecto Final Folcademy - Backend con NodeJS, Express y mongoDB
 
 ## Info api
 
@@ -6,73 +6,99 @@
 
 Para iniciar el server y probar la api seguimos los siguientes pasos en la terminal
 
-- npm i
-- npm run dev-server
+1. npm i
+1. npm run dev-server
 
 El puerto por defecto es 3000
 
+
+### API repo y web
+
+#### Repo de la api https://bitbucket.org/eliasrod46/eliasfolcademy/src/main/
+#### Web de la api https://app-folcademy.herokuapp.com/
+
+
 ### Descripcion de la api
 
-###### La api cuenta con con 5 endpints, get, post, put, patch y detele
+#### auth (registro y logeo de usuario con validaciones y token de autentificacion de usuario)
 
-- get -> obtener todos los usuarios, o traer un usuario por id, username o email
-- post -> agregar un usuario(datos por body)
-- put -> editar un usuario(indicando id por URL)(datos por body)
-- patch -> reemplazar un usuario(indicando id por URL)(datos por body)
-- delete -> eliminar un usuario(indicando id por URL)
+##### auth cuenta con con 2 endponts post
 
-### URL
-
-    1.Get:
-    - get -> url:port/api/V2.0/usuarios -> ej. localhost:3000/usuarios
-    - get -> url:port/api/V2.0/usuarios/id/:dato -> ej. localhost:3000/usuarios/id/k546kjjk4563j4kh5jk34
-    - get -> url:port/api/V2.0/usuarios/username/:dato -> ej. localhost:3000/usuarios/username/usuario1
-    - get -> url:port/api/V2.0/usuarios/email/:dato -> ej. localhost:3000/usuarios/email/usuario1@usuario1.com
-
-
-    1.Post:
-    - post -> url:port/api/V2.0/usuarios -> ej. localhost:3000/api/V2.0/usuarios (formato del body acontinuacion)
-
-
-    1.Put:
-    - put -> url:port/api/V2.0/usuarios/id/:dato -> ej. localhost:3000/api/V2.0/usuarios/:k546kjjk4563j4kh5jk34(ponemos el id del usuario a reemplazar)(formato del body acontinuacion)
-    - put -> url:port/api/V2.0/usuarios/username/:dato -> ej. localhost:3000/api/V2.0/usuarios/username/usuario1(ponemos el username del usuario a reemplazar)(formato del body acontinuacion)
-    - put -> url:port/api/V2.0/usuarios/email/:dato -> ej. localhost:3000/api/V2.0/usuarios/email/usuario1@usuario1.com(ponemos el email del usuario a reemplazar)(formato del body acontinuacion)
-
-
-    1. Patch:
-    - Patch -> url:port/api/V2.0/usuarios/id/:dato -> ej. localhost:3000/api/V2.0/usuarios/:k546kjjk4563j4kh5jk34(ponemos el id del usuario a editar)(formato del body acontinuacion)
-    - Patch -> url:port/api/V2.0/usuarios/username/:dato -> ej. localhost:3000/api/V2.0/usuarios/username/usuario1(ponemos el username del usuario a editar)(formato del body acontinuacion)
-    - Patch -> url:port/api/V2.0/usuarios/email/:dato -> ej. localhost:3000/api/V2.0/usuarios/email/usuario1@usuario1.com(ponemos el email del usuario a editar)(formato del body acontinuacion)
-
-
-
-    1. Delete:
-    - Delete -> url:port/api/V2.0/usuarios/id/:dato -> ej. localhost:3000/api/V2.0/usuarios/:k546kjjk4563j4kh5jk34(ponemos el id del usuario a eliminar)
-    - Delete -> url:port/api/V2.0/usuarios/username/:dato -> ej. localhost:3000/api/V2.0/usuarios/username/usuario1(ponemos el username del usuario a eliminar)
-    - Delete -> url:port/api/V2.0/usuarios/email/:dato -> ej. localhost:3000/api/V2.0/usuarios/email/usuario1@usuario1.com(ponemos el email del usuario a eliminar)
-
-### Formato body
-
-###### El body tiene 8 atributos, de los cuales 5(username,nombre,apellido,email y password) son obligatorios y 2 son unicos(username y email)por que que no puede existir dos iguales en la bbdd
-
+- post/login -> logueo de usuario(datos por body)
+    retorna token en header con la clave auth-token
 ```
 {
-	"username": "",
-	"nombre": "",
-	"apellido": "",
-	"email": "",
-	"telefono": "",
-	"edad": ,
-	"direccion": "",
-	"password": ""
+  "email": "",
+  "password": ""
 }
 ```
 
-### Aclaraciones
+- post/signup -> Registro de usaurios(datos por body)
+    retorna info del usuario creado
+```
+{
+  "username": "",
+  "nombre": "",
+  "apellido": "",
+  "email": "",
+  "telefono": "",
+  "edad": ,
+  "direccion": "",
+  "password": ""
+}
+```
 
-#### Para agregar(post), reemplazar(put) editar(patch) se deben enviar los 5 atributos obligatorios (username,nombre,apellido,email y password) los otros pueden no enviarse
+##### Auth URL
+-> URL ej.: https://app-folcademy.herokuapp.com//api/auth
 
-#### Al editar modificamos un usuario y si no encontramos el usuario a modificar el sistema no hace anda nada y reemplazar zambia todo el bloque y si no encuentra al usaurio a reemplazar lo agrega
+- login -> URL/api/auth/signup
+- signup -> URL/api/auth/login 
 
-#### Para get all(todos los archivos) se puede recibir un querry "orden" para definir si queremos que los elementos se muestren en forma ascendente ("ASC") o descendente("DESC")
+
+#### Usuarios (Manejo de usuarios)
+
+##### usuairos cuenta con con 5 endponts post
+
+- get/get -> retorna todos lo usuarios de la bbdd
+- get/:id -> retorna el usuario con la id indicada
+- delete/:id -> elimina el usuario con la id indicada(requiere token de usaurio logeado)
+
+- post/post -> agrega un usuario(requiere token de usaurio logeado)
+```
+{
+  "username": "",
+  "nombre": "",
+  "apellido": "",
+  "email": "",
+  "telefono": "",
+  "edad": ,
+  "direccion": "",
+  "password": ""
+}
+```
+
+- put/:id -> edita el usaurio con la id indicada(requiere token de usaurio logeado)
+```
+{
+  "username": "",
+  "nombre": "",
+  "apellido": "",
+  "email": "",
+  "telefono": "",
+  "edad": ,
+  "direccion": "",
+  "password": ""
+}
+```
+
+
+
+
+##### usuarios URL
+-> URL ej.: https://app-folcademy.herokuapp.com/api/usuarios
+
+- getAll    -> URL/api/usuarios/
+- getById   -> URL/api/usuarios/:id
+- post      -> URL/api/usuarios/
+- put       -> URL/api/usuarios/:id
+- delete    -> URL/api/usuarios/:id

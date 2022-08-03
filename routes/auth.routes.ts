@@ -15,6 +15,6 @@ router.post(
   authCnlr.signup
 ); //registro
 
-router.post("/login", [...userInputValidator.logginValidation], authCnlr.login); //Logeo
+router.post("/login",  [...userInputValidator.logginValidation],authCnlr.login); //Logeo
 
 export default router;

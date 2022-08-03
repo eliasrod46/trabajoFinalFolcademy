@@ -9,7 +9,7 @@ export const login = async (
   next: NextFunction
 ) => {
   try {
-    const userFound = await User.findOne({ email: req.body.email });
+    const userFound = await User.findOne({ email: req.body.email }).select('+password');
     if (!userFound) return res.status(400).json({ message: "User Not found" });
 
     const machPassword = await User.validatePassword(
@@ -63,19 +63,15 @@ export const signup = async (
       email,
       telefono,
       edad,
-      direccion,
       password: await User.encryptPassword(password),
+      direccion,
     });
 
-    const savedUser = await user.save();
-    const token = jwt.sign(
-      { id: savedUser._id },
-      process.env.JWT_SECRET || "",
-      {
-        expiresIn: process.env.JWT_EXPIRATION, //24hs
-      }
-    );
-    res.json({ message: "User Created Successful", token });
+
+    await user.save();
+    const savedUser = await User.findById(user._id)
+    
+    res.json({ savedUser });
   } catch (error) {
     return next(error);
   }

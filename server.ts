@@ -20,7 +20,9 @@ app.get("/", (req:any, res:any) => {
     name: "practica Backend ApiREST",
     author: "Elias Rodriguez",
     description: "BackPracticaFolcademy",
-    version: "1.5.0",
+    documentation: "readme.md",
+    repository: "https://bitbucket.org/eliasrod46/eliasfolcademy/src/main/",
+    webpage: "https://app-folcademy.herokuapp.com/"
   });
 });
 

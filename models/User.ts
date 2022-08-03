@@ -45,6 +45,7 @@ const UserSchema = new Schema(
     password: {
       type: String,
       require: [true, "El password es obligatorio"],
+      select: false
     },
   },
   {
